@@ -1,4 +1,7 @@
 import PropTypes from 'prop-types';
+import { StatisticsWrapper } from './Statistics.styled';
+
+
 
 export const Statistics = ({
   good,
@@ -7,8 +10,7 @@ export const Statistics = ({
   total,
   positivePercentage,
 }) => (
-  <div>
-    <h2>Statistics</h2>
+  <StatisticsWrapper>
     <p>Good: {good}</p>
     <p>Neutral: {neutral}</p>
     <p>Bad: {bad}</p>
@@ -16,7 +18,7 @@ export const Statistics = ({
     <p>
       positive Feedback: {positivePercentage >= 0 ? positivePercentage : 0} %
     </p>
-  </div>
+  </StatisticsWrapper>
 );
 
 Statistics.propTypes = {

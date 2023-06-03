@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Statistics } from './Statistics/Statistics';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
-import { SectionTitle } from './SectionTitle/SectionTitle';
+import { Section } from './Section/Section';
 import { NotificationMessage } from './NotificationMessage/NotificationMessage';
 
 export class App extends Component {
@@ -26,29 +26,42 @@ export class App extends Component {
       bad: prevState.bad + 1,
     }));
 
+  // totalFeedback = () => {
+  //   const { good, bad, neutral } = this.state;
+  //   return good + bad + neutral;
+  // };
+  // positivePercentage = () => {
+  //   const { good } = this.state;
+  //   Math.round((good * 100) / this.totalFeedback);
+  // };
+
   render() {
     const { good, bad, neutral } = this.state;
     const totalFeedback = good + bad + neutral;
     const positivePercentage = Math.round((good * 100) / totalFeedback);
 
     return (
+      
       <div>
-        <SectionTitle title="Please Leave Feedback" />
-        <FeedbackOptions
-          onLeaveGoodFeedback={this.onGoodFeedback}
-          onLeaveNeutralFeedback={this.onNeutralFeedback}
-          onLeaveBadFeedback={this.onBadFeedback}
-        />
+        <Section title="Please leave your feedback">
+          <FeedbackOptions
+            onLeaveGoodFeedback={this.onGoodFeedback}
+            onLeaveNeutralFeedback={this.onNeutralFeedback}
+            onLeaveBadFeedback={this.onBadFeedback}
+          />
+        </Section>
         {good === 0 && bad === 0 && neutral === 0 ? (
           <NotificationMessage message="There is no feedback" />
         ) : (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={totalFeedback}
-            positivePercentage={positivePercentage}
-          />
+          <Section title="Statistics">
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={totalFeedback}
+              positivePercentage={positivePercentage}
+            />
+          </Section>
         )}
       </div>
     );
