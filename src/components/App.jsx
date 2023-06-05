@@ -11,20 +11,11 @@ export class App extends Component {
     bad: 0,
   };
 
-  onGoodFeedback = () =>
-    this.setState(prevState => ({
-      good: prevState.good + 1,
-    }));
-
-  onNeutralFeedback = () =>
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }));
-
-  onBadFeedback = () =>
-    this.setState(prevState => ({
-      bad: prevState.bad + 1,
-    }));
+  handleFeedback = event => {
+    // console.log(event.currentTarget.name);
+    const { name } = event.currentTarget;
+    this.setState(prevState => ({ [name]: prevState[name] + 1 }));
+  };
 
   totalFeedback = () => {
     const { good, bad, neutral } = this.state;
@@ -37,14 +28,13 @@ export class App extends Component {
 
   render() {
     const { good, bad, neutral } = this.state;
-  
+
     return (
       <div>
         <Section title="Please leave your feedback">
           <FeedbackOptions
-            onLeaveGoodFeedback={this.onGoodFeedback}
-            onLeaveNeutralFeedback={this.onNeutralFeedback}
-            onLeaveBadFeedback={this.onBadFeedback}
+            options={Object.keys(this.state)}
+            handleFeedback={this.handleFeedback}
           />
         </Section>
         {good === 0 && bad === 0 && neutral === 0 ? (
