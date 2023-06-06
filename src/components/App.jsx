@@ -14,6 +14,7 @@ export class App extends Component {
   handleFeedback = event => {
     // console.log(event.currentTarget);
     const { name } = event.currentTarget;
+    // console.log(name)
     this.setState(prevState => ({ [name]: prevState[name] + 1 }));
   };
 
